@@ -1,34 +1,36 @@
 const express = require('express');
-const mongoose = require('mongoose');
-const path = require('path');
+const mysql = require('mysql');
 require('dotenv').config();
 
 const routes = require('./routes/routes').routes;
 
-// Create a .env file in the root directory with USERNAME={mongoUserName}, PASSWORD={mongoUserPassword}
-const db = `mongodb://${process.env.USERNAME}:${
-  process.env.PASSWORD
-}@ds347367.mlab.com:47367/skateboard_shop`;
+const connection = mysql.createConnection({
+  host: 'localhost',
+  user: `${process.env.USER}`,
+  password: `${process.env.PASSWORD}`,
+  database: 'SkateBoardStore',
+  port: process.env.DB_PORT
+});
+
+console.log(`Connected to db on port ${process.env.DB_PORT}`);
 
 const app = express();
 app.use(express.json());
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header(
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept'
+  );
+  next();
+});
 
-mongoose
-  .connect(db, { useNewUrlParser: true })
-  .then(() => console.log('MongoDB Connected...'))
-  .catch(err => console.log(err));
-
-routes(app, db);
+routes(app, connection);
 
 if (process.env.NODE_ENV === 'production') {
-  // Set static folder
-  app.use(express.static('client/build'));
+  app.use(express.static(__dirname + '/public/'));
 
-  app.get('*', (req, res) => {
-    res.sendFile(
-      path.resolve(__dirname, 'skateboard-store', 'build', 'index.html')
-    );
-  });
+  app.get(/.*/, (req, res) => res.sendFile(__dirname + 'public/index.html'));
 }
 
 const PORT = process.env.PORT || 5000;
