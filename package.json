@@ -8,13 +8,16 @@
   "scripts": {
     "client": "npm start --prefix skateboard-store",
     "dev": "concurrently \"npm run serve\" \"npm run client\"",
-    "serve": "nodemon server/app.js"
+    "serve": "tsc && nodemon out/app.js"
   },
   "dependencies": {
+    "@types/express": "^4.17.0",
+    "@types/mysql": "^2.15.6",
     "concurrently": "^4.1.1",
     "dotenv": "^8.0.0",
     "express": "^4.17.1",
     "mysql": "^2.17.1",
-    "nodemon": "^1.19.1"
+    "nodemon": "^1.19.1",
+    "typescript": "^3.5.3"
   }
 }
