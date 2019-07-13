@@ -1,10 +1,20 @@
-const express = require('express');
-const mysql = require('mysql');
+import express, { Express } from 'express';
+import { createConnection, ConnectionConfig } from 'mysql';
 require('dotenv').config();
 
 const routes = require('./routes/routes').routes;
 
-const connection = mysql.createConnection({
+declare const process: {
+  env: {
+    DB_PORT: number;
+    PORT: number;
+    USER: string;
+    PASSWORD: string;
+    NODE_ENV: string;
+  };
+};
+
+const connection = createConnection({
   host: 'localhost',
   user: `${process.env.USER}`,
   password: `${process.env.PASSWORD}`,
@@ -14,7 +24,7 @@ const connection = mysql.createConnection({
 
 console.log(`Connected to db on port ${process.env.DB_PORT}`);
 
-const app = express();
+const app: Express = express();
 app.use(express.json());
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
