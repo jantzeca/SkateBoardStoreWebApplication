@@ -1,8 +1,7 @@
-import express, { Express } from 'express';
-import { createConnection, ConnectionConfig } from 'mysql';
-require('dotenv').config();
-
-const routes = require('./routes/routes').routes;
+import express, { Express, Request, Response } from 'express';
+import { createConnection, Connection } from 'mysql';
+import('dotenv').then(dotenv => dotenv.config());
+import { Router } from './routes/routes';
 
 declare const process: {
   env: {
@@ -14,7 +13,7 @@ declare const process: {
   };
 };
 
-const connection = createConnection({
+const connection: Connection = createConnection({
   host: 'localhost',
   user: `${process.env.USER}`,
   password: `${process.env.PASSWORD}`,
@@ -26,7 +25,7 @@ console.log(`Connected to db on port ${process.env.DB_PORT}`);
 
 const app: Express = express();
 app.use(express.json());
-app.use((req, res, next) => {
+app.use((req: Request, res: Response, next: any) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header(
     'Access-Control-Allow-Headers',
@@ -35,14 +34,16 @@ app.use((req, res, next) => {
   next();
 });
 
-routes(app, connection);
+const router: Router = new Router();
+router.routes(app, connection);
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(__dirname + '/public/'));
-
-  app.get(/.*/, (req, res) => res.sendFile(__dirname + 'public/index.html'));
+  app.get(/.*/, (req: Request, res: Response) =>
+    res.sendFile(__dirname + 'public/index.html')
+  );
 }
 
-const PORT = process.env.PORT || 5000;
+const PORT: number = process.env.PORT || 5000;
 
 app.listen(PORT, () => console.log(`Listening on port ${PORT}...`));

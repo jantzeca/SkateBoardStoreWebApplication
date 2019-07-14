@@ -1,12 +1,11 @@
 import { Express } from 'express';
 import { Connection } from 'mysql';
+import CheckHealthController from '../Controllers/CheckHealthController';
 
-const checkHealthController = require('../Controllers/CheckHealthController');
+export class Router {
+  public checkHealthController: CheckHealthController = new CheckHealthController();
 
-const routes = (app: Express, db: Connection) => {
-  app.route('/checkhealth').get(checkHealthController.healthTest);
-};
-
-module.exports = {
-  routes
-};
+  public routes(app: Express, db: Connection): void {
+    app.route('/checkHealth').get(this.checkHealthController.healthTest);
+  }
+}
