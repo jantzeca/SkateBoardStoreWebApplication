@@ -19,7 +19,6 @@ export class UserRepository {
 /**
  * TODO:
  * Learn how to save to a collection
- * Commit, push, and delete this branch as mongo is now reimplemented.
  *
  * Later, design the database. Think about creating model schemas to be used in others as the "relational" aspect of this.
  */
