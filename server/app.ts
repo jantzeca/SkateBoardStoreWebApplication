@@ -1,5 +1,5 @@
 import express, { Express, Request, Response } from 'express';
-import { createConnection, Connection } from 'mysql';
+import mongoose from 'mongoose';
 import('dotenv').then(dotenv => dotenv.config());
 import { Router } from './routes/routes';
 
@@ -13,15 +13,10 @@ declare const process: {
   };
 };
 
-const connection: Connection = createConnection({
-  host: 'localhost',
-  user: `${process.env.USER}`,
-  password: `${process.env.PASSWORD}`,
-  database: 'SkateBoardStore',
-  port: process.env.DB_PORT
-});
-
-console.log(`Connected to db on port ${process.env.DB_PORT}`);
+mongoose
+  .connect(`mongodb://localhost/skateshop`, { useNewUrlParser: true })
+  .then(() => console.log('MongoDB Connected...'))
+  .catch(err => console.log(err));
 
 const app: Express = express();
 app.use(express.json());
@@ -35,7 +30,7 @@ app.use((req: Request, res: Response, next: any) => {
 });
 
 const router: Router = new Router();
-router.routes(app, connection);
+router.routes(app);
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(__dirname + '/public/'));

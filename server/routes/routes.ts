@@ -1,11 +1,14 @@
 import { Express } from 'express';
-import { Connection } from 'mysql';
-import CheckHealthController from '../Controllers/CheckHealthController';
+import { CheckHealthController } from '../Controllers/CheckHealthController';
+import { UserController } from '../Controllers/UserController';
 
 export class Router {
-  public checkHealthController: CheckHealthController = new CheckHealthController();
+  private checkHealthController: CheckHealthController = new CheckHealthController();
+  private userController: UserController = new UserController();
 
-  public routes(app: Express, db: Connection): void {
+  public routes(app: Express): void {
     app.route('/checkHealth').get(this.checkHealthController.healthTest);
+
+    app.route('/user').post(this.userController.addNewUser);
   }
 }
