@@ -16,10 +16,3 @@ export class UserRepository {
     });
   };
 }
-
-/**
- * TODO:
- * Learn how to save to a collection
- *
- * Later, design the database. Think about creating model schemas to be used in others as the "relational" aspect of this.
- */
