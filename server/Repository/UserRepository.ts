@@ -1,4 +1,4 @@
-import { model, Types } from 'mongoose';
+import { model } from 'mongoose';
 import { userSchema } from '../Models/User';
 
 const User = model('User', userSchema, 'user');
@@ -20,6 +20,6 @@ export class UserRepository {
   };
 
   public getUserById = (id: string, response: Function) => {
-    User.find({ _id: Types.ObjectId(id) }, (err, user) => response(err, user));
+    User.findById(id, (err, user) => response(err, user));
   };
 }
