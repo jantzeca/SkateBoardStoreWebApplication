@@ -10,14 +10,14 @@ export class UserController {
     });
   };
 
-  public getUsers = (req: Request, res: Response) => {
-    this.userRepository.getAllUsers((err: any, result: any) => {
+  public listUsers = (req: Request, res: Response) => {
+    this.userRepository.listUsers((err: any, result: any) => {
       err ? res.status(500).send(err) : res.status(200).json(result);
     });
   };
 
-  public getUserById = (req: Request, res: Response) => {
-    this.userRepository.getUserById(
+  public listUserById = (req: Request, res: Response) => {
+    this.userRepository.listUserById(
       req.params.userId,
       (err: any, result: any) => {
         err ? res.status(500).send(err) : res.status(200).json(result);

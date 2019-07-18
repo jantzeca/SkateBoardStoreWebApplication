@@ -12,7 +12,7 @@ export class Router {
     app
       .route('/user')
       .post(this.userController.addNewUser)
-      .get(this.userController.getUsers);
-    app.route('/user/:userId').get(this.userController.getUserById);
+      .get(this.userController.listUsers);
+    app.route('/user/:userId').get(this.userController.listUserById);
   }
 }

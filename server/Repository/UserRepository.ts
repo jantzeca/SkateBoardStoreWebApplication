@@ -15,11 +15,11 @@ export class UserRepository {
     });
   };
 
-  public getAllUsers = (response: Function) => {
+  public listUsers = (response: Function) => {
     User.find({}, (err, user) => response(err, user));
   };
 
-  public getUserById = (id: string, response: Function) => {
+  public listUserById = (id: string, response: Function) => {
     User.findById(id, (err, user) => response(err, user));
   };
 }
