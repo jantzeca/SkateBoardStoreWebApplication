@@ -1,4 +1,4 @@
-import { model, Model, Document } from 'mongoose';
+import { model, Types } from 'mongoose';
 import { userSchema } from '../Models/User';
 
 const User = model('User', userSchema, 'user');
@@ -6,7 +6,6 @@ const User = model('User', userSchema, 'user');
 export class UserRepository {
   public createUser = (userInfo: any, response: Function) => {
     const newUser = new User(userInfo);
-    console.log(newUser);
     newUser.save((err: any, user: any) => {
       return response(err, {
         fname: user.fname,
@@ -14,5 +13,13 @@ export class UserRepository {
         age: user.age
       });
     });
+  };
+
+  public getAllUsers = (response: Function) => {
+    User.find({}, (err, user) => response(err, user));
+  };
+
+  public getUserById = (id: string, response: Function) => {
+    User.find({ _id: Types.ObjectId(id) }, (err, user) => response(err, user));
   };
 }

@@ -9,4 +9,19 @@ export class UserController {
       err ? res.status(500).send(err) : res.status(200).json(result);
     });
   };
+
+  public getUsers = (req: Request, res: Response) => {
+    this.userRepository.getAllUsers((err: any, result: any) => {
+      err ? res.status(500).send(err) : res.status(200).json(result);
+    });
+  };
+
+  public getUserById = (req: Request, res: Response) => {
+    this.userRepository.getUserById(
+      req.params.userId,
+      (err: any, result: any) => {
+        err ? res.status(500).send(err) : res.status(200).json(result);
+      }
+    );
+  };
 }

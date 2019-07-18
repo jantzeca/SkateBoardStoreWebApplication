@@ -9,6 +9,10 @@ export class Router {
   public routes(app: Express): void {
     app.route('/checkHealth').get(this.checkHealthController.healthTest);
 
-    app.route('/user').post(this.userController.addNewUser);
+    app
+      .route('/user')
+      .post(this.userController.addNewUser)
+      .get(this.userController.getUsers);
+    app.route('/user/:userId').get(this.userController.getUserById);
   }
 }
