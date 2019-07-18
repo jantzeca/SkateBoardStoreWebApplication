@@ -27,4 +27,10 @@ export class UserRepository {
   public deleteUser = (id: string, response: Function) => {
     User.findByIdAndDelete(id, err => response(err));
   };
+
+  public updateUser = (id: string, updates: any, response: Function) => {
+    User.findOneAndUpdate({ _id: id }, updates, { new: true }, (err, user) => {
+      response(err, user);
+    });
+  };
 }

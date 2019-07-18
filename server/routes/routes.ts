@@ -16,6 +16,7 @@ export class Router {
     app
       .route('/user/:userId')
       .get(this.userController.listUserById)
-      .delete(this.userController.deleteUser);
+      .delete(this.userController.deleteUser)
+      .put(this.userController.updateUser);
   }
 }

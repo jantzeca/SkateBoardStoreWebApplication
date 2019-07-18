@@ -30,4 +30,14 @@ export class UserController {
       err ? res.status(500).send(err) : res.status(200).send('User deleted');
     });
   };
+
+  public updateUser = (req: Request, res: Response) => {
+    this.userRepository.updateUser(
+      req.params.userId,
+      req.body,
+      (err: any, result: any) => {
+        err ? res.status(500).send(err) : res.status(200).json(result);
+      }
+    );
+  };
 }
