@@ -8,6 +8,7 @@ export class UserRepository {
     const newUser = new User(userInfo);
     newUser.save((err: any, user: any) => {
       return response(err, {
+        _id: user._id,
         fname: user.fname,
         lname: user.lname,
         age: user.age
@@ -21,5 +22,9 @@ export class UserRepository {
 
   public listUserById = (id: string, response: Function) => {
     User.findById(id, (err, user) => response(err, user));
+  };
+
+  public deleteUser = (id: string, response: Function) => {
+    User.findByIdAndDelete(id, err => response(err));
   };
 }

@@ -13,6 +13,9 @@ export class Router {
       .route('/user')
       .post(this.userController.addNewUser)
       .get(this.userController.listUsers);
-    app.route('/user/:userId').get(this.userController.listUserById);
+    app
+      .route('/user/:userId')
+      .get(this.userController.listUserById)
+      .delete(this.userController.deleteUser);
   }
 }

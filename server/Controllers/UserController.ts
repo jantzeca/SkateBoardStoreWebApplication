@@ -24,4 +24,10 @@ export class UserController {
       }
     );
   };
+
+  public deleteUser = (req: Request, res: Response) => {
+    this.userRepository.deleteUser(req.params.userId, (err: any) => {
+      err ? res.status(500).send(err) : res.status(200).send('User deleted');
+    });
+  };
 }
