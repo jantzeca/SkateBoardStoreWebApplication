@@ -9,9 +9,9 @@ export class UserRepository {
     newUser.save((err: any, user: any) => {
       return response(err, {
         _id: user._id,
-        fname: user.fname,
-        lname: user.lname,
-        age: user.age
+        isAdmin: user.isAdmin,
+        email: user.email,
+        username: user.username
       });
     });
   };

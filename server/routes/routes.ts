@@ -11,7 +11,7 @@ export class Router {
 
     app
       .route('/user')
-      .post(this.userController.addNewUser)
+      .post(this.userController.createUser)
       .get(this.userController.listUsers);
     app
       .route('/user/:userId')

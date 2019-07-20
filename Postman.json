@@ -1,0 +1,141 @@
+{
+	"info": {
+		"_postman_id": "0209a8b7-df34-4e10-b81f-5f123874cbe2",
+		"name": "SkateboardingStoreApp",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Create User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"isAdmin\": false,\n\t\"email\": \"jeffry.smith@email.com\",\n\t\"username\": \"jeffsmith\",\n\t\"password\": \"squidBoi1!\"\n}"
+						},
+						"url": {
+							"raw": "{{skateDBEndpoint}}/user",
+							"host": [
+								"{{skateDBEndpoint}}"
+							],
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{skateDBEndpoint}}/user",
+							"host": [
+								"{{skateDBEndpoint}}"
+							],
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List User By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{skateDBEndpoint}}/user/5d2fc91c62c0adaafec52d80",
+							"host": [
+								"{{skateDBEndpoint}}"
+							],
+							"path": [
+								"user",
+								"5d2fc91c62c0adaafec52d80"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{skateDBEndpoint}}/user/5d30e16cb59438bbc563e521",
+							"host": [
+								"{{skateDBEndpoint}}"
+							],
+							"path": [
+								"user",
+								"5d30e16cb59438bbc563e521"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"gary.smith@email.com\",\n\t\"username\": \"garysmith\",\n\t\"password\": \"squidBoi2@\"\n}"
+						},
+						"url": {
+							"raw": "{{skateDBEndpoint}}/user/5d327a072b9f2324929f1e9d",
+							"host": [
+								"{{skateDBEndpoint}}"
+							],
+							"path": [
+								"user",
+								"5d327a072b9f2324929f1e9d"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Check Health",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{skateDBEndpoint}}/checkhealth",
+					"host": [
+						"{{skateDBEndpoint}}"
+					],
+					"path": [
+						"checkhealth"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
