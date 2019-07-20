@@ -20,6 +20,11 @@ export class UserRepository {
     User.find({}, (err, user) => response(err, user));
   };
 
+  public searchForUserByProps = (searchProps: any, response: Function) => {
+    console.log(searchProps);
+    User.find(searchProps, (err, user) => response(err, user));
+  };
+
   public listUserById = (id: string, response: Function) => {
     User.findById(id, (err, user) => response(err, user));
   };

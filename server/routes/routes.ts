@@ -13,6 +13,7 @@ export class Router {
       .route('/user')
       .post(this.userController.createUser)
       .get(this.userController.listUsers);
+    app.get('/userSearchProps', this.userController.searchForUserByProps);
     app
       .route('/user/:userId')
       .get(this.userController.listUserById)

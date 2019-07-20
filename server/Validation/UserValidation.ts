@@ -17,7 +17,7 @@ export class UserValidation {
     }
   }
 
-  public validateUpdateUser(req: Request): void {
+  public validateOperateOnExistingUser(req: Request): void {
     const { email, username, password, isAdmin } = req.body;
     if (email) this.Util.isValidEmail(email);
     if (username) this.Util.isValidUsername(username);

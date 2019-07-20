@@ -23,6 +23,20 @@ export class UserController {
     });
   };
 
+  public searchForUserByProps = (req: Request, res: Response) => {
+    try {
+      this.userValidation.validateOperateOnExistingUser(req);
+      this.userRepository.searchForUserByProps(
+        req.body,
+        (err: any, result: any) => {
+          err ? res.status(500).send(err) : res.status(200).json(result);
+        }
+      );
+    } catch (err) {
+      res.status(400).send(err.message);
+    }
+  };
+
   public listUserById = (req: Request, res: Response) => {
     try {
       this.userValidation.validateMongoDBUniqueId(req.params.userId);
@@ -51,6 +65,7 @@ export class UserController {
   public updateUser = (req: Request, res: Response) => {
     try {
       this.userValidation.validateMongoDBUniqueId(req.params.userId);
+      this.userValidation.validateOperateOnExistingUser(req);
       this.userRepository.updateUser(
         req.params.userId,
         req.body,
