@@ -1,6 +1,6 @@
 {
   "name": "skateboard_store_app",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Skateboard store web application",
   "main": "app.js",
   "author": "Chris Jantzen <jantzeca@mail.uc.edu>",
