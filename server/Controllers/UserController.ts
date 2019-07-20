@@ -4,11 +4,11 @@ import { UserValidation } from '../Validation/UserValidation';
 
 export class UserController {
   private userRepository: UserRepository = new UserRepository();
-  private UserValidation: UserValidation = new UserValidation();
+  private userValidation: UserValidation = new UserValidation();
 
   public createUser = (req: Request, res: Response) => {
     try {
-      this.UserValidation.validateCreateUser(req);
+      this.userValidation.validateCreateUser(req);
       this.userRepository.createUser(req.body, (err: any, result: any) => {
         err ? res.status(500).send(err) : res.status(200).json(result);
       });
@@ -25,7 +25,7 @@ export class UserController {
 
   public listUserById = (req: Request, res: Response) => {
     try {
-      this.UserValidation.validateMongoDBUniqueId(req.params.userId);
+      this.userValidation.validateMongoDBUniqueId(req.params.userId);
       this.userRepository.listUserById(
         req.params.userId,
         (err: any, result: any) => {
@@ -39,7 +39,7 @@ export class UserController {
 
   public deleteUser = (req: Request, res: Response) => {
     try {
-      this.UserValidation.validateMongoDBUniqueId(req.params.userId);
+      this.userValidation.validateMongoDBUniqueId(req.params.userId);
       this.userRepository.deleteUser(req.params.userId, (err: any) => {
         err ? res.status(500).send(err) : res.status(200).send('User deleted');
       });
@@ -50,7 +50,7 @@ export class UserController {
 
   public updateUser = (req: Request, res: Response) => {
     try {
-      this.UserValidation.validateMongoDBUniqueId(req.params.userId);
+      this.userValidation.validateMongoDBUniqueId(req.params.userId);
       this.userRepository.updateUser(
         req.params.userId,
         req.body,
