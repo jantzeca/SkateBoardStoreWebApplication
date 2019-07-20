@@ -17,40 +17,12 @@ export class Router {
 
     app
       .route('/user')
-      .post((req: Request, res: Response) => {
-        try {
-          this.userValidation.validateCreateUser(req);
-          this.userController.createUser(req, res);
-        } catch (err) {
-          res.status(400).send(err.message);
-        }
-      })
+      .post(this.userController.createUser)
       .get(this.userController.listUsers);
     app
       .route('/user/:userId')
-      .get((req: Request, res: Response) => {
-        try {
-          this.userValidation.validateMongoDBUniqueId(req.params.userId);
-          this.userController.listUserById(req, res);
-        } catch (err) {
-          res.status(400).send(err.message);
-        }
-      })
-      .delete((req: Request, res: Response) => {
-        try {
-          this.userValidation.validateMongoDBUniqueId(req.params.userId);
-          this.userController.deleteUser(req, res);
-        } catch (err) {
-          res.status(400).send(err.message);
-        }
-      })
-      .put((req: Request, res: Response) => {
-        try {
-          this.userValidation.validateMongoDBUniqueId(req.params.userId);
-          this.userController.updateUser(req, res);
-        } catch (err) {
-          res.status(400).send(err.message);
-        }
-      });
+      .get(this.userController.listUserById)
+      .delete(this.userController.deleteUser)
+      .put(this.userController.updateUser);
   }
 }
