@@ -1,6 +1,4 @@
 import { Express, Request, Response } from 'express';
-
-// Controllers
 import { CheckHealthController } from '../Controllers/CheckHealthController';
 import { UserController } from '../Controllers/UserController';
 
