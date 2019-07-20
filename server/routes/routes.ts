@@ -4,13 +4,9 @@ import { Express, Request, Response } from 'express';
 import { CheckHealthController } from '../Controllers/CheckHealthController';
 import { UserController } from '../Controllers/UserController';
 
-// Validation
-import { UserValidation } from '../Validation/UserValidation';
-
 export class Router {
   private checkHealthController: CheckHealthController = new CheckHealthController();
   private userController: UserController = new UserController();
-  private userValidation: UserValidation = new UserValidation();
 
   public routes(app: Express): void {
     app.route('/checkHealth').get(this.checkHealthController.healthTest);
