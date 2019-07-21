@@ -16,26 +16,26 @@ export class UserRepository {
     });
   };
 
-  public listUsers = (response: Function) => {
-    User.find({}, (err, user) => response(err, user));
+  public listUsers = (callback: Function) => {
+    User.find({}, (err, user) => callback(err, user));
   };
 
-  public searchForUserByProps = (searchProps: any, response: Function) => {
+  public searchForUserByProps = (searchProps: any, callback: Function) => {
     console.log(searchProps);
-    User.find(searchProps, (err, user) => response(err, user));
+    User.find(searchProps, (err, user) => callback(err, user));
   };
 
-  public listUserById = (id: string, response: Function) => {
-    User.findById(id, (err, user) => response(err, user));
+  public listUserById = (id: string, callback: Function) => {
+    User.findById(id, (err, user) => callback(err, user));
   };
 
-  public deleteUser = (id: string, response: Function) => {
-    User.findByIdAndDelete(id, err => response(err));
+  public deleteUser = (id: string, callback: Function) => {
+    User.findByIdAndDelete(id, err => callback(err));
   };
 
-  public updateUser = (id: string, updates: any, response: Function) => {
+  public updateUser = (id: string, updates: any, callback: Function) => {
     User.findOneAndUpdate({ _id: id }, updates, { new: true }, (err, user) => {
-      response(err, user);
+      callback(err, user);
     });
   };
 }

@@ -5,11 +5,14 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "type": "chrome",
+      "type": "node",
       "request": "launch",
-      "name": "Launch Chrome against localhost",
-      "url": "http://localhost:5858",
-      "webRoot": "${workspaceFolder}"
+      "name": "nodemon",
+      "runtimeExecutable": "nodemon",
+      "program": "${workspaceRoot}/out/app.js",
+      "restart": true,
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen"
     }
   ]
 }

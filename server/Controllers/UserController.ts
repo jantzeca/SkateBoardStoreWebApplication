@@ -4,11 +4,10 @@ import { UserValidation } from '../Validation/UserValidation';
 
 export class UserController {
   private userRepository: UserRepository = new UserRepository();
-  private userValidation: UserValidation = new UserValidation();
 
   public createUser = (req: Request, res: Response) => {
     try {
-      this.userValidation.validateCreateUser(req);
+      UserValidation.validateCreateUser(req);
       this.userRepository.createUser(req.body, (err: any, result: any) => {
         err ? res.status(500).send(err) : res.status(200).json(result);
       });
@@ -25,7 +24,7 @@ export class UserController {
 
   public searchForUserByProps = (req: Request, res: Response) => {
     try {
-      this.userValidation.validateOperateOnExistingUser(req);
+      UserValidation.validateOperateOnExistingUser(req);
       this.userRepository.searchForUserByProps(
         req.body,
         (err: any, result: any) => {
@@ -39,7 +38,7 @@ export class UserController {
 
   public listUserById = (req: Request, res: Response) => {
     try {
-      this.userValidation.validateMongoDBUniqueId(req.params.userId);
+      UserValidation.validateMongoDBUniqueId(req.params.userId);
       this.userRepository.listUserById(
         req.params.userId,
         (err: any, result: any) => {
@@ -53,7 +52,7 @@ export class UserController {
 
   public deleteUser = (req: Request, res: Response) => {
     try {
-      this.userValidation.validateMongoDBUniqueId(req.params.userId);
+      UserValidation.validateMongoDBUniqueId(req.params.userId);
       this.userRepository.deleteUser(req.params.userId, (err: any) => {
         err ? res.status(500).send(err) : res.status(200).send('User deleted');
       });
@@ -64,8 +63,8 @@ export class UserController {
 
   public updateUser = (req: Request, res: Response) => {
     try {
-      this.userValidation.validateMongoDBUniqueId(req.params.userId);
-      this.userValidation.validateOperateOnExistingUser(req);
+      UserValidation.validateMongoDBUniqueId(req.params.userId);
+      UserValidation.validateOperateOnExistingUser(req);
       this.userRepository.updateUser(
         req.params.userId,
         req.body,
