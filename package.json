@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "client": "npm start --prefix skateboard-store",
-    "dev": "concurrently \"yarn run serve\" \"yarn run client\"",
+    "dev": "concurrently \"yarn run serve:watch\" \"yarn run client\"",
     "build": "tsc",
     "serve": "node --inspect=5860 -r ts-node/register ./server/app.ts",
     "serve:watch": "nodemon"
