@@ -2,4 +2,4 @@
 
 ## Mock E-Commerce web application to emulate an online skateboard store
 
-### Using React, Express, Mysql, and NodeJs
+### Using React, Express, MongoDB, and NodeJs
