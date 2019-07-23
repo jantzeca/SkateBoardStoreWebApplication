@@ -10,9 +10,7 @@ export class UserController {
       UserValidation.validateCreateUser(req);
       this.userRepository.listUsers((err: any, result: any) => {
         if (err) res.status(500).send(err);
-        console.log(result);
         for (let user of result) {
-          console.log(user);
           if (user.username === req.body.username) {
             res.status(400).send('Username already in use');
           }
