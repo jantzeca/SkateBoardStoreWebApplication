@@ -21,7 +21,6 @@ export class UserRepository {
   };
 
   public searchForUserByProps = (searchProps: any, callback: Function) => {
-    console.log(searchProps);
     User.find(searchProps, (err, user) => callback(err, user));
   };
 
